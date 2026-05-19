@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0f0f0f;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.card-container {
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+/* Floating rainbow title styling */
+.birthday-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, #ff007f, #ffaa00, #00ffaa, #00aaff, #cc00ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Polar-style Memory Frame */
+.gallery-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#memoryCaption {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+}
+
+/* Tap button optimized for thumbs */
+.next-btn {
+    margin-top: 25px;
+    background: #ff007f;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+    width: 100%;
+}
+
+.next-btn:active {
+    transform: scale(0.98);
+}
