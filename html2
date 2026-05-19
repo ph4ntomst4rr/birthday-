@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card-container">
+        <h1 class="birthday-title">HAPPY BIRTHDAY!</h1>
+        
+        <div class="gallery-card">
+            <div id="cake-3d-container"></div>
+            <p id="memoryCaption">The Cake at Stake! Happy Birthday! 🎂</p>
+        </div>
+
+        <button class="next-btn" onclick="nextMemory()">Tap for Next Memory ❤️</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
