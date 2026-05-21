@@ -12,7 +12,7 @@
         
         <div class="gallery-card">
             <div id="cake-3d-container"></div>
-            <p id="memoryCaption">The Cake at Stake! Happy Birthday! 🎂</p>
+            <p id="memoryCaption"> Happy Birthday! 🎂</p>
         </div>
 
         <button class="next-btn" onclick="nextMemory()">Tap for Next Memory ❤️</button>
