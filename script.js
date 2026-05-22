@@ -72,13 +72,10 @@ const orbitRadius = 3.5;
 photoFiles.forEach((fileName, index) => {
     const singleFrameContainer = new THREE.Group();
     
-    // Position them horizontally in a row along the back wall (Z = -3.8)
-    // Spacing them out: index 0 is left, index 1 is center, index 2 is right
     singleFrameContainer.position.x = (index - 1) * 3.8; 
     singleFrameContainer.position.y = 1.8;   // Height on the wall
     singleFrameContainer.position.z = -3.8;  // Flushed against the back wall
     
-    // Keep them facing straight forward toward the camera
     singleFrameContainer.rotation.set(0, 0, 0);
 
     // --- EVEN BIGGER SIZE: Stretched to look like real poster frames ---
@@ -181,6 +178,5 @@ function launchCelebration() {
         console.log("Audio element error:", error);
     }
 }
-window.addEventListener('click', launchCelebration, { once: true });
-window.addEventListener('touchstart', launchCelebration, { once: true });
-window.addEventListener('keydown', launchCelebration, { once: true });
+window.addEventListener('click', launchCelebration);
+window.addEventListener('touchstart', launchCelebration);
