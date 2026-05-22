@@ -65,7 +65,7 @@ for (let i = 0; i < dollopCount; i++) {
 scene.add(cakeGroup);
 const textureLoader = new THREE.TextureLoader();
 const frameGroup = new THREE.Group(); 
-const photoFiles = ['1st.png', '2nd.png', '3rd.jpg'];
+const photoFiles = ['1st.PNG', '2nd.PNG', '3rd.jpg'];
 const frameCount = photoFiles.length;
 const orbitRadius = 2.8; 
 
