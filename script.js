@@ -166,23 +166,20 @@ animate();
 const yippee = document.getElementById('yippeeSound');
 
 function launchCelebration() {
-    if (yippee) {
-        yipee.currentTime = 0; 
-        yippee.play().catch(e => console.log("Audio blocked"));
-    }
     if (typeof confetti === 'function') {
-        confetti({
-            particleCount: 150,
-            spread: 80,
-            origin: { x: 0, y: 0.8 },
-            angle: 60
-        });
-        confetti({
-            particleCount: 150,
-            spread: 80,
-            origin: { x: 1, y: 0.8 },
-            angle: 120
-        });
+        confetti({ particleCount: 150, spread: 80, origin: { x: 0, y: 0.8 }, angle: 60 });
+        confetti({ particleCount: 150, spread: 80, origin: { x: 1, y: 0.8 }, angle: 120 });
+    }
+
+    try {
+        const yippee = document.getElementById('yippeeSound');
+        
+        if (yippee) {
+            yippee.currentTime = 0;
+            yippee.play().catch(e => console.log("yippee sound waiting..."));
+        }
+    } catch (error) {
+        console.log("Audio files not found or still loading:", error);
     }
 }
 window.addEventListener('click', launchCelebration, { once: true });
