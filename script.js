@@ -67,7 +67,7 @@ const textureLoader = new THREE.TextureLoader();
 const frameGroup = new THREE.Group(); 
 const photoFiles = ['1st.PNG', '2nd.PNG', '3rd.jpg'];
 const frameCount = photoFiles.length;
-const orbitRadius = 2.8; 
+const orbitRadius = 3.5; 
 
 photoFiles.forEach((fileName, index) => {
     const angle = (index / frameCount) * Math.PI * 2;
@@ -77,19 +77,22 @@ photoFiles.forEach((fileName, index) => {
     singleFrameContainer.position.y = 0.8; 
     singleFrameContainer.lookAt(0, 0.8, 0);
 
-    const borderGeom = new THREE.BoxGeometry(1.3, 1.0, 0.05);
+    // --- BIGGER SIZE: Expanded the backing frame dimension ---
+    const borderGeom = new THREE.BoxGeometry(2.2, 1.6, 0.05);
     const borderMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 });
     const borderMesh = new THREE.Mesh(borderGeom, borderMat);
     singleFrameContainer.add(borderMesh);
 
     textureLoader.load(fileName, (texture) => {
-        const photoGeom = new THREE.PlaneGeometry(1.1, 0.8);
+        texture.minFilter = THREE.LinearFilter;
+        
+        // --- BIGGER SIZE: Stretched the photo dimension to match the new border ---
+        const photoGeom = new THREE.PlaneGeometry(2.0, 1.4);
         const photoMat = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
         const photoMesh = new THREE.Mesh(photoGeom, photoMat);
         photoMesh.position.z = 0.03; 
         singleFrameContainer.add(photoMesh);
     });
-
     frameGroup.add(singleFrameContainer);
 });
 scene.add(frameGroup);
