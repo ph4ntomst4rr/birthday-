@@ -109,7 +109,54 @@ window.addEventListener('resize', () => {
 });
 
 let clock = new THREE.Clock();
+// ==========================================
+//      ADDING THE ROOM (TABLE & WALL)
+// ==========================================
 
+// 1. THE BACKGROUND ACCENT WALL
+const wallGeometry = new THREE.PlaneGeometry(25, 15);
+// Creating a cozy teal/blue textured wallpaper look using a built-in canvas pattern
+const wallCanvas = document.createElement('canvas');
+wallCanvas.width = 128;
+wallCanvas.height = 128;
+const wallCtx = wallCanvas.getContext('2d');
+wallCtx.fillStyle = '#2b4a4f'; // Base wallpaper color
+wallCtx.fillRect(0, 0, 128, 128);
+wallCtx.strokeStyle = '#375e64'; // Elegant diamond/stripes pattern lines
+wallCtx.lineWidth = 2;
+wallCtx.beginPath();
+wallCtx.moveTo(0, 0); wallCtx.lineTo(128, 128);
+wallCtx.moveTo(128, 0); wallCtx.lineTo(0, 128);
+wallCtx.stroke();
+
+const wallTexture = new THREE.CanvasTexture(wallCanvas);
+wallTexture.wrapS = THREE.RepeatWrapping;
+wallTexture.wrapT = THREE.RepeatWrapping;
+wallTexture.repeat.set(8, 4); // Repeats the pattern across the wall cleanly
+
+const wallMaterial = new THREE.MeshStandardMaterial({ 
+    map: wallTexture, 
+    roughness: 0.9 
+});
+const wallMesh = new THREE.Mesh(wallGeometry, wallMaterial);
+wallMesh.position.set(0, 2.5, -4.0); 
+scene.add(wallMesh);
+const tableGeometry = new THREE.CylinderGeometry(2.5, 2.5, 0.2, 32);
+
+const tableMaterial = new THREE.MeshStandardMaterial({ 
+    color: 0x5c4033, 
+    roughness: 0.4,   
+    metalness: 0.1 
+});
+const tableMesh = new THREE.Mesh(tableGeometry, tableMaterial);
+tableMesh.position.set(0, -0.1, 0); 
+scene.add(tableMesh);
+
+const legGeometry = new THREE.CylinderGeometry(0.1, 0.1, 4, 16);
+const legMaterial = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.5 });
+const legMesh = new THREE.Mesh(legGeometry, legMaterial);
+legMesh.position.set(0, -2.1, 0); 
+scene.add(legMesh);
 function animate() {
     requestAnimationFrame(animate);
     
