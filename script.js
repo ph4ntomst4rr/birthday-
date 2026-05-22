@@ -163,8 +163,6 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
-const yippee = document.getElementById('yippeeSound');
-
 function launchCelebration() {
     if (typeof confetti === 'function') {
         confetti({ particleCount: 150, spread: 80, origin: { x: 0, y: 0.8 }, angle: 60 });
@@ -172,14 +170,15 @@ function launchCelebration() {
     }
 
     try {
-        const yippee = document.getElementById('yippeeSound');
+        const yippeeAudio = document.getElementById('yippeeSound');
         
-        if (yippee) {
-            yippee.currentTime = 0;
-            yippee.play().catch(e => console.log("yippee sound waiting..."));
+        if (yippeeAudio) {
+            yippeeAudio.currentTime = 0;
+           
+            yippeeAudio.play().catch(e => console.log("Audio play blocked by browser:", e));
         }
     } catch (error) {
-        console.log("Audio files not found or still loading:", error);
+        console.log("Audio element error:", error);
     }
 }
 window.addEventListener('click', launchCelebration, { once: true });
