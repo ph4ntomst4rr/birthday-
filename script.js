@@ -68,32 +68,36 @@ const frameGroup = new THREE.Group();
 const photoFiles = ['1st.PNG', '2nd.PNG', '3rd.jpg'];
 const frameCount = photoFiles.length;
 const orbitRadius = 3.5; 
-
+// --- FIXED & WALL-MOUNTED PHOTOS SETUP ---
 photoFiles.forEach((fileName, index) => {
-    const angle = (index / frameCount) * Math.PI * 2;
     const singleFrameContainer = new THREE.Group();
-    singleFrameContainer.position.x = Math.cos(angle) * orbitRadius;
-    singleFrameContainer.position.z = Math.sin(angle) * orbitRadius;
-    singleFrameContainer.position.y = 0.8; 
-    singleFrameContainer.lookAt(0, 0.8, 0);
+    
+    // Position them horizontally in a row along the back wall (Z = -3.8)
+    // Spacing them out: index 0 is left, index 1 is center, index 2 is right
+    singleFrameContainer.position.x = (index - 1) * 3.8; 
+    singleFrameContainer.position.y = 1.8;   // Height on the wall
+    singleFrameContainer.position.z = -3.8;  // Flushed against the back wall
+    
+    // Keep them facing straight forward toward the camera
+    singleFrameContainer.rotation.set(0, 0, 0);
 
-    // --- BIGGER SIZE: Expanded the backing frame dimension ---
-    const borderGeom = new THREE.BoxGeometry(2.2, 1.6, 0.05);
-    const borderMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.8 });
+    // --- EVEN BIGGER SIZE: Stretched to look like real poster frames ---
+    const borderGeom = new THREE.BoxGeometry(3.4, 2.6, 0.05);
+    const borderMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.9 });
     const borderMesh = new THREE.Mesh(borderGeom, borderMat);
     singleFrameContainer.add(borderMesh);
 
     textureLoader.load(fileName, (texture) => {
         texture.minFilter = THREE.LinearFilter;
+        texture.generateMipmaps = false;
         
-        // --- BIGGER SIZE: Stretched the photo dimension to match the new border ---
-        const photoGeom = new THREE.PlaneGeometry(2.0, 1.4);
+        const photoGeom = new THREE.PlaneGeometry(3.2, 2.4);
         const photoMat = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
         const photoMesh = new THREE.Mesh(photoGeom, photoMat);
         photoMesh.position.z = 0.03; 
         singleFrameContainer.add(photoMesh);
     });
-    frameGroup.add(singleFrameContainer);
+    scene.add(singleFrameContainer); 
 });
 scene.add(frameGroup);
 window.addEventListener('resize', () => {
