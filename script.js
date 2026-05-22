@@ -109,10 +109,6 @@ window.addEventListener('resize', () => {
 });
 
 let clock = new THREE.Clock();
-// ==========================================
-//      ADDING THE ROOM (TABLE & WALL)
-// ==========================================
-
 // 1. THE BACKGROUND ACCENT WALL
 const wallGeometry = new THREE.PlaneGeometry(25, 15);
 // Creating a cozy teal/blue textured wallpaper look using a built-in canvas pattern
@@ -159,17 +155,11 @@ legMesh.position.set(0, -2.1, 0);
 scene.add(legMesh);
 function animate() {
     requestAnimationFrame(animate);
-    
-    const elapsedTime = clock.getElapsedTime();
-   
-    cakeGroup.rotation.y += 0.005;
-    if (typeof frameGroup !== 'undefined') {
-        frameGroup.rotation.y -= 0.003;
-        frameGroup.children.forEach((frame, i) => {
-            frame.position.y = 0.8 + Math.sin(elapsedTime * 1.5 + i) * 0.08;
-        });
+
+    if (typeof cake !== 'undefined') {
+        cake.rotation.y += 0.01; 
     }
-    
+
     renderer.render(scene, camera);
 }
 
